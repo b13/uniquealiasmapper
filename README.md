@@ -48,10 +48,11 @@ The expiration functionality does not cut it yet, so we need to improve this are
 
 Thanks to the RealURL authors for providing such a good logic, which served as inspiration for this Mapper. On top, the creators of the Aspects/Mappers - thanks to them for providing such a flexible and extensible way for creating custom mappers and enhancers.
 
-## Authors & Maintenance
-
-Benni Mack for b13, Germany.
-
 ## License
 
-GPLv2+
+As TYPO3 Core, _uniquealiasmapper_ is licensed under GPL2 or later. See the LICENSE file for more details.
+
+## Authors & Maintenance
+
+_uniquealiasmapper_ was initially created for a customer project by Benni Mack for [b13, Stuttgart](https://b13.com).
+
