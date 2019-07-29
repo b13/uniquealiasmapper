@@ -98,7 +98,7 @@ class PersistedUniqueAliasMapper implements PersistedMappableAspectInterface, St
         }
 
         $originalAlias = $result[$this->aliasField];
-        $helper = new SlugHelper($this->tableName, $this->aliasField, $this->settings['uniqueConfiguration']);
+        $helper = new SlugHelper($this->tableName, $this->aliasField, $this->settings['uniqueConfiguration'] ?? []);
         $alias = $helper->sanitize($originalAlias);
         $alias = trim($alias);
 
