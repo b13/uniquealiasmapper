@@ -15,6 +15,6 @@ CREATE TABLE tx_uniquealiasmapper (
 
 	PRIMARY KEY (uid),
 	KEY tablename (tablename),
-	KEY resolverkey (aliasfieldname(20),recorduid,sys_language_uid,expire),
-	KEY resolverkey2 (tablename(32),aliasfieldname(20),aliasvalue(20),expire)
+	KEY resolverkey (aliasfieldname(20),recorduid,sys_language_uid,expireson),
+	KEY resolverkey2 (tablename(32),aliasfieldname(20),aliasvalue(20),expireson)
 );
