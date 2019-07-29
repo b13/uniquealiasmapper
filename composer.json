@@ -1,0 +1,28 @@
+{
+  "name": "b13/uniquealiasmapper",
+  "type": "typo3-cms-extension",
+  "description": "Registers a Mapper for URL enhancements",
+  "license": ["GPL-2.0-or-later"],
+  "authors": [{
+	"name": "Benni Mack",
+	"email": "benni@typo3.org",
+	"role": "Maintainer"
+  }],
+  "config": {
+    "sort-packages": true
+  },
+  "require": {
+    "typo3/cms-core": "^9.5"
+  },
+  "keywords": ["TYPO3 CMS", "Routing", "Mapper", "Enhancer"],
+	"extra": {
+		"typo3/cms": {
+			"extension-key": "uniquealiasmapper"
+		}
+	},
+	"autoload": {
+		"psr-4": {
+			"B13\\UniqueAliasMapper\\": "Classes/"
+		}
+	}
+}
