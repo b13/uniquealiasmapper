@@ -18,21 +18,22 @@ Once ready, you can configure the Mapper in your site configuration file.
 Example which maps `$_GET['addressid']` into a `/address/burger-king-germany` based on
 the `company` field of `tt_address`.
 
-    routeEnhancers:
-      AliasExample:
-        type: Simple
-        routePath: '/address/{partneralias}'
-        _arguments:
-          addressid: partneralias
-        aspects:
-          partneralias:
-            type: UniqueAlias
-            tableName: 'tt_address'
-            aliasField: 'company'
-            expires: '15d'
-            uniqueConfiguration:
-              fallbackCharacter: '-'
-              
+````yml
+routeEnhancers:
+  AliasExample:
+    type: Simple
+    routePath: '/address/{partneralias}'
+    _arguments:
+      addressid: partneralias
+    aspects:
+      partneralias:
+        type: UniqueAlias
+        tableName: 'tt_address'
+        aliasField: 'company'
+        expires: '15d'
+        uniqueConfiguration:
+          fallbackCharacter: '-'
+````       
 
 With the Unique Alias Mapper, the URL will look like this: `https://example.com/my/page/address/burger-king-germany/`
 
