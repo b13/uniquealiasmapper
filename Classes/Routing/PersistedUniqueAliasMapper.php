@@ -16,12 +16,12 @@ use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Context\LanguageAspectFactory;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\DataHandling\SlugHelper;
+use TYPO3\CMS\Core\Domain\Repository\PageRepository;
 use TYPO3\CMS\Core\Routing\Aspect\PersistedMappableAspectInterface;
-use TYPO3\CMS\Core\Routing\Aspect\PersistenceDelegate;
 use TYPO3\CMS\Core\Routing\Aspect\StaticMappableAspectInterface;
 use TYPO3\CMS\Core\Site\SiteLanguageAwareTrait;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Frontend\Page\PageRepository;
+use TYPO3\CMS\Frontend\Page\PageRepository as PageRepositoryv9;
 
 /**
  * Works like uniqAlias in RealURL
@@ -44,11 +44,6 @@ class PersistedUniqueAliasMapper implements PersistedMappableAspectInterface, St
      * @var string
      */
     protected $aliasField;
-
-    /**
-     * @var PersistenceDelegate
-     */
-    protected $persistenceDelegate;
 
     /**
      * @var string[]
@@ -149,15 +144,19 @@ class PersistedUniqueAliasMapper implements PersistedMappableAspectInterface, St
     }
 
     /**
-     * @return PageRepository
+     * @return PageRepositoryv9|PageRepository
      */
-    protected function createPageRepository(): PageRepository
+    protected function createPageRepository()
     {
         $context = clone GeneralUtility::makeInstance(Context::class);
         $context->setAspect(
             'language',
             LanguageAspectFactory::createFromSiteLanguage($this->siteLanguage)
         );
+        // Can be removed once TYPO3 v9 compatibility is removed.
+        if (class_exists(PageRepositoryv9::class)) {
+            return GeneralUtility::makeInstance(PageRepositoryv9::class, $context);
+        }
         return GeneralUtility::makeInstance(PageRepository::class, $context);
     }
 
