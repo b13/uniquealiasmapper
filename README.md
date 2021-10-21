@@ -24,7 +24,7 @@ routeEnhancers:
     type: Simple
     routePath: '/address/{partneralias}'
     _arguments:
-      addressid: partneralias
+      partneralias: addressid
     aspects:
       partneralias:
         type: UniqueAlias
@@ -35,11 +35,43 @@ routeEnhancers:
           fallbackCharacter: '-'
 ````       
 
+In the partial ListItem.html of `tt_address` the link could be generated this way:
+`<f:link.page pageUid="{settings.singlePid}" additionalParams="{addressid: address}">Details</f:link.page>`.
+
 With the Unique Alias Mapper, the URL will look like this: `https://example.com/my/page/address/burger-king-germany/`
 
 With TYPO3's Core "PersistedAliasMapper" the URL will look like this `https://example.com/my/page/address/Burger%20King%20Germany/`.
 
 On top, this Mapper comes with a caching layer in between, just like RealURL's "uniqAlias" feature did in the past.
+
+Even more complex route enhancers are possible too. An example for a link with a controller/action (Movie/show) of an
+extension `myext` where the uid is in the parameter `tx_myext_pi1[content]` and `title` is a column 
+of `tx_myext_domain_model_content`:
+
+````yml
+routeEnhancers:
+  MyextPlugin:
+    type: Extbase
+    limitToPages:
+      - 24
+    extension: Myext
+    plugin: Pi1
+    routes:
+      -
+        routePath: '/entry/{myext_title}'
+        _controller: 'Movie::show'
+        _arguments:
+          myext_title: content
+    defaultController: 'Movie::list'
+    aspects:
+      myext_title:
+        type: UniqueAlias
+        tableName: tx_myext_domain_model_content
+        aliasField: title
+        expires: 15d
+        uniqueConfiguration:
+          fallbackCharacter: '-'
+````  
 
 ## ToDo
 
